@@ -1,4 +1,5 @@
 from player import Player
+from datetime import datetime
 
 
 class PlayerFactory:
@@ -9,7 +10,7 @@ class PlayerFactory:
         return [{
                 "nickname" : player.nickname,
                 "email" : player.email, 
-                "date_of_birth" : f"{player.date_of_birth}".replace("00:00:00", "").strip(), 
+                "date_of_birth" : player.date_of_birth.strftime("%Y-%m-%d"),
                 "xp" : player.xp,
                 "class" : player.cls, 
         } for player in players ]
@@ -49,7 +50,7 @@ class PlayerFactory:
             email = ET.SubElement(player, "email")
             email.text = p.email
             date_of_birth = ET.SubElement(player, "date_of_birth")
-            date_of_birth.text = f"{p.date_of_birth}".replace("00:00:00", "").strip()
+            date_of_birth.text = datetime.strftime(player.date_of_birth, "%Y-%m-%d")
             xp = ET.SubElement(player, "xp")
             xp.text = str(p.xp)
             classes = ET.SubElement(player, "class")
@@ -88,7 +89,7 @@ class PlayerFactory:
             proto_player = proto_player_list.player.add()
             proto_player.nickname = p.nickname
             proto_player.email = p.email
-            proto_player.date_of_birth = f"{p.date_of_birth}".replace("00:00:00", "").strip()
+            proto_player.date_of_birth = p.date_of_birth.strftime("%Y-%m-%d")
             proto_player.xp = p.xp
             proto_player.cls = PlayerList.Class.Value(p.cls)
 
