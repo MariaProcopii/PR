@@ -1,0 +1,193 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Access API",
+        "version": "1.0.0"
+    },
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic"
+        }
+    },
+    "paths": {
+        "/api/v1/": {
+            "get": {
+                "description": "API Welcome Message",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Electric Scooters API"
+                    }
+                }
+            }
+        },
+        "/api/v1/scooter/": {
+            "get": {
+                "description": "Returns a list of ElectroScooter",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/ElectroScooter"
+                                }
+                            }
+                        } 
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new ElectroScooter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "ElectroScooter payload",
+                    "in": "body",
+                    "description": "JSON payload for resource creation",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#definitions/ElectroScooterPayload"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Successfully created resource"
+                    }
+                }
+            }
+        },
+        "/api/v1/scooter/{id}": {
+            "get": {
+                "description": "Returns an ElectroScooter by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "description": "Electric Scooters ID"
+                }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/ElectroScooter"
+                                }
+                            }
+                        } 
+                    }
+                }
+            },
+            "put": {
+                "description": "Updates an existing ElectroScooter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "ElectroScooter payload",
+                        "in": "body",
+                        "description": "JSON payload for resource update",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#definitions/ElectroScooterPayload"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "Electric Scooters ID"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully updated resource"
+                    },
+                    "404": {
+                        "description": "No such record with {id}"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes an existing ElectroScooter",
+                "security": {
+                    "basicAuth": []
+                },
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "description": "Electric Scooters ID"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted resource"
+                    },
+                    "401": {
+                        "description": "Not authorized request"
+                    },
+                    "404": {
+                        "description": "No such recored with {id}"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ElectroScooter": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the electrical scooter"
+                    },
+                    "battery_level": {
+                        "type": "int",
+                        "description": "The battery level of the electrical scooter"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ElectroScooterPayload": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "battery_level": {
+                    "type": "integer" 
+                }
+            }
+        }
+    }
+} 
