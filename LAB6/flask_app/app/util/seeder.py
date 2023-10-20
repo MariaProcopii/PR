@@ -6,7 +6,6 @@ from app.models.electro_scooter import ElectroScooter
 
 
 class Seeder:
-
     _app = None
     _context = None
 
@@ -52,8 +51,10 @@ class Seeder:
         context = Seeder.get_context()
         with context():
             for _ in range(number_of_records):
-                name = "".join(random.choice(string.ascii_letters)
-                               for _ in range(1, random.randint(5, 50)))
+                name = "".join(
+                    random.choice(string.ascii_letters)
+                    for _ in range(1, random.randint(5, 50))
+                )
                 battery_level = random.randint(1, 100)
                 electro_scooter = ElectroScooter(name, battery_level)
                 db.session.add(electro_scooter)

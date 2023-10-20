@@ -1,4 +1,4 @@
-#!/home/maria/Projects/UNI-YEAR-3/PR/LAB6/venv/bin/python3.11
+#!/home/uni/UNI/III-sem1/PR/lab6-copy/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
