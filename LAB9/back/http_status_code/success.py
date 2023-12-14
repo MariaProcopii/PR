@@ -1,0 +1,1 @@
+OK = '{"message": "ok"}', 200, {"Access-Control-Allow-Origin": "*"}
